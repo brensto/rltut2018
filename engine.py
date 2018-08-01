@@ -11,6 +11,9 @@ from components.inventory import Inventory
 from death_functions import kill_monster, kill_player
 from game_messages import Message, MessageLog
 
+
+ #Test addition
+ 
 def main():
 	screen_width = 80
 	screen_height = 50
