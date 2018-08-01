@@ -1,7 +1,7 @@
 import libtcodpy as libtcod
 
 from entity import Entity, get_blocking_entities_at_location
-from input_handlers import handle_keys
+from input_handlers import handle_keys, handle_mouse
 from render_functions import clear_all, render_all, RenderOrder
 from map_objects.game_map import GameMap
 from fov_functions import initialize_fov, recompute_fov
@@ -87,6 +87,7 @@ def main():
 		clear_all(con, entities)
 
 		action = handle_keys(key, game_state)
+		mouse_action = handle_mouse(mouse)
 
 		move = action.get('move')
 		pickup = action.get('pickup')
@@ -95,6 +96,9 @@ def main():
 		inventory_index = action.get('inventory_index')
 		exit = action.get('exit')
 		fullscreen = action.get('fullscreen')
+
+		left_click = mouse_action.get('left_click')
+		right_click = mouse_action.get('right_click')
 
 		player_turn_results = []
 
