@@ -9,7 +9,7 @@ from entity import Entity
 from map_objects.tile import Tile
 from map_objects.rectangle import Rect
 from render_functions import RenderOrder
-from item_functions import heal
+from item_functions import heal, cast_lightning
 
 class GameMap:
 	def __init__(self, width, height):
@@ -75,9 +75,14 @@ class GameMap:
 			y = randint (room.y1 + 1, room.y2 - 1)
 
 			if not any([entity for entity in entities if entity.x == x and entity.y == y]):
-				item_component = Item(use_function=heal, amount=4)
-				item = Entity(x, y, '!', libtcod.violet, 'Healing Potion', render_order=RenderOrder.ITEM, item=item_component)
+				item_chance = randint(0, 100)
 
+				if item_chance < 70:
+					item_component = Item(use_function=heal, amount=4)
+					item = Entity(x, y, '!', libtcod.violet, 'Healing Potion', render_order=RenderOrder.ITEM, item=item_component)
+				else:
+					item_component = Item(use_function=cast_lightning, damage=20, maximum_range=5)
+					item = Entity(x, y, '#', libtcod.yellow, 'Lightning Scroll', render_order=RenderOrder.ITEM, item=item_component)
 				entities.append(item)
 
 	def make_map(self, max_rooms, room_min_size, room_max_size, map_width, map_height, player, entities, max_monsters_per_room, max_items_per_room):
