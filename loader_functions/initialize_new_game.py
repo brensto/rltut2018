@@ -65,7 +65,7 @@ def get_constants():
 			'room_max_size': room_max_size,
 			'room_min_size': room_min_size,
 			'max_rooms': max_rooms,
-			'fov_algorithm': fov_algoithm,
+			'fov_algorithm': fov_algorithm,
 			'fov_light_walls': fov_light_walls,
 			'fov_radius': fov_radius,
 			'max_monsters_per_room': max_monsters_per_room,
@@ -73,20 +73,22 @@ def get_constants():
 			'colors': colors
 	}
 
-	def get_game_variables(constants):
-		fighter_component = Fighter(hp=30, defense=2, power=5)
-		inventory_component = Inventory(26)
-		player = Entity(0, 0, '@', libtod.white, 'Player', blocks=True, render_order=RenderOrder.ACTOR, fighter=fighter_component, inventory=inventory_component)
-		entities = [player]
+	return constants
+
+def get_game_variables(constants):
+	fighter_component = Fighter(hp=30, defense=2, power=5)
+	inventory_component = Inventory(26)
+	player = Entity(0, 0, '@', libtcod.white, 'Player', blocks=True, render_order=RenderOrder.ACTOR, fighter=fighter_component, inventory=inventory_component)
+	entities = [player]
 
 
-   		game_map = GameMap(constants['map_width'], constants['map_height'])
-    	game_map.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'], constants['map_width'], constants['map_height'], player, entities, constants['max_monsters_per_room'], constants['max_items_per_room'])
+	game_map = GameMap(constants['map_width'], constants['map_height'])
+	game_map.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'], constants['map_width'], constants['map_height'], player, entities, constants['max_monsters_per_room'], constants['max_items_per_room'])
 
-    	message_log = MessageLog(constants['message_x'], constants['message_width'], constants['message_height'])
+	message_log = MessageLog(constants['message_x'], constants['message_width'], constants['message_height'])
 
-    	game_state = GameStates.PLAYERS_TURN
+	game_state = GameStates.PLAYERS_TURN
 
-    	return player, entities, game_map, message_log, game_state
+	return player, entities, game_map, message_log, game_state
 
-		return constants
+	return constants
