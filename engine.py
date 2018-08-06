@@ -168,6 +168,7 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 			item_dropped = player_turn_result.get('item_dropped')
 			targeting = player_turn_result.get('targeting')
 			targeting_cancelled = player_turn_result.get('targeting_cancelled')
+			xp = player_turn_result.get('xp')
 
 			if message:
 				message_log.add_message(message)
@@ -211,9 +212,12 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 				message_log.add_message(Message('You gain {0} experience points.'.format(xp)))
 
 				if leveled_up:
-					message_log.add_message(Message('Your battle skills grow stronger! You reached level {0}'.format(player.level.current_level) + '!', libtcod.yellow))
+					message_log.add_message(Message(
+						'Your battle skills grow stronger! You reached level {0}'.format(
+							player.level.current_level) + '!', libtcod.yellow))
 					previous_game_state = game_state
 					game_state = GameStates.LEVEL_UP
+
 
 		if game_state == GameStates.ENEMY_TURN:
 			for entity in entities:

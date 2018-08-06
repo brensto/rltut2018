@@ -5,7 +5,7 @@ from render_functions import RenderOrder
 
 class Entity:
 	#generic object to represent players, enemies, items, etc.
-	def __init__(self, x, y, char, color, name, blocks=False, render_order=RenderOrder.CORPSE, fighter=None, ai=None, item=None, inventory=None, stairs=None):
+	def __init__(self, x, y, char, color, name, blocks=False, render_order=RenderOrder.CORPSE, fighter=None, ai=None, item=None, inventory=None, stairs=None, level=None):
 		self.x = x
 		self.y = y
 		self.char = char
