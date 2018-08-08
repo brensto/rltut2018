@@ -1,6 +1,6 @@
 from random import randint
 
-def from_dungeion_level(table, dungeon_level):
+def from_dungeon_level(table, dungeon_level):
 	for (value, level) in reversed(table):
 		if dungeon_level >= level:
 			return value
