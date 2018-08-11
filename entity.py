@@ -1,6 +1,8 @@
 import libtcodpy as libtcod
 import math
 
+from components.item import Item
+
 from render_functions import RenderOrder
 
 class Entity:
@@ -19,6 +21,8 @@ class Entity:
 		self.inventory = inventory
 		self.stairs = stairs
 		self.level = level
+		self.equipment = equipment
+		self.equipment = equippable
 
 		if self.fighter:
 			self.fighter.owner = self
@@ -38,6 +42,17 @@ class Entity:
 		if self.level:
 			self.level.owner = self
 
+		if self.equipment:
+			self.equipment.owner = self
+
+		if self.equippable:
+			self.equippable.owner = self
+
+			if not self.item:
+				item = Item()
+				self.item = item
+				self.item.owner = self
+				
 	def move(self, dx, dy):
 		#move the entity by a given amount
 		self.x += dx
